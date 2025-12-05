@@ -543,22 +543,22 @@ export default function Marketplace() {
       <main>
         {/* Product Detail View */}
         {currentPage === 'product-detail' && selectedProduct && (
-          <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8 lg:py-12">
             <button 
               onClick={navigateToHome}
-              className="flex items-center gap-2 text-gray-600 hover:text-[#4A90E2] mb-6 transition-all hover:gap-3 hover:pl-1 font-medium"
+              className="flex items-center gap-2 text-gray-600 hover:text-[#4A90E2] mb-4 md:mb-6 transition-all hover:gap-3 hover:pl-1 font-medium text-sm md:text-base"
             >
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-4 md:w-5 h-4 md:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
               Back to Products
             </button>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
               {/* Product Images */}
-              <div className="space-y-4">
+              <div className="space-y-3 md:space-y-4">
                 {/* Main Image */}
-                <div className="relative aspect-square bg-white rounded-xl overflow-hidden border border-gray-200 group">
+                <div className="relative aspect-square bg-white rounded-lg md:rounded-xl overflow-hidden border border-gray-200 group">
                   <ImageWithFallback
                     src={(() => {
                       const baseUrl = selectedProduct.image.split('?')[0];
@@ -602,7 +602,7 @@ export default function Marketplace() {
                 </div>
 
                 {/* Thumbnail Strip */}
-                <div className="grid grid-cols-4 gap-3">
+                <div className="grid grid-cols-4 gap-2 md:gap-3">
                   {[0, 1, 2, 3].map((index) => (
                     <button
                       key={index}
@@ -636,12 +636,12 @@ export default function Marketplace() {
               </div>
 
               {/* Product Info */}
-              <div className="space-y-5">
+              <div className="space-y-4 md:space-y-5">
                 <div>
-                  <p className="text-[#56A45E] text-sm font-medium mb-2">{selectedProduct.category}</p>
-                  <div className="flex items-start justify-between mb-3">
-                    <h1 className="text-3xl text-gray-900 font-bold leading-tight flex-1 pr-4">{selectedProduct.name}</h1>
-                    <span className="px-3 py-1 bg-green-50 text-green-600 rounded-full text-xs font-semibold whitespace-nowrap">
+                  <p className="text-[#56A45E] text-xs md:text-sm font-medium mb-1.5 md:mb-2">{selectedProduct.category}</p>
+                  <div className="flex items-start justify-between mb-2 md:mb-3 gap-2">
+                    <h1 className="text-xl md:text-2xl lg:text-3xl text-gray-900 font-bold leading-tight flex-1">{selectedProduct.name}</h1>
+                    <span className="px-2 md:px-3 py-0.5 md:py-1 bg-green-50 text-green-600 rounded-full text-[10px] md:text-xs font-semibold whitespace-nowrap flex-shrink-0">
                       {selectedProduct.inStock ? 'In Stock' : 'Out of Stock'}
                     </span>
                   </div>
@@ -665,24 +665,24 @@ export default function Marketplace() {
                   </button>
                 </div>
 
-                <div className="flex items-baseline gap-3">
-                  <span className="text-3xl text-gray-900 font-bold">₦{selectedProduct.price.toLocaleString()}</span>
-                  <span className="text-xl text-gray-400 line-through">₦{(selectedProduct.price * 1.25).toLocaleString()}</span>
+                <div className="flex items-baseline gap-2 md:gap-3">
+                  <span className="text-2xl md:text-3xl text-gray-900 font-bold">₦{selectedProduct.price.toLocaleString()}</span>
+                  <span className="text-base md:text-xl text-gray-400 line-through">₦{(selectedProduct.price * 1.25).toLocaleString()}</span>
                 </div>
 
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-sm md:text-base text-gray-600 leading-relaxed">
                   {selectedProduct.description || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.'}
                 </p>
 
                 {/* Weight Selection */}
-                <div className="space-y-3">
-                  <label className="text-gray-900 font-semibold block">Weight</label>
-                  <div className="flex flex-wrap gap-3">
+                <div className="space-y-2 md:space-y-3">
+                  <label className="text-sm md:text-base text-gray-900 font-semibold block">Weight</label>
+                  <div className="flex flex-wrap gap-2 md:gap-3">
                     {['500 g', '1 Kg', '2 Kg', '5 Kg'].map((weight) => (
                       <button
                         key={weight}
                         onClick={() => setSelectedSize(weight)}
-                        className={`px-5 py-2.5 rounded-lg transition-all font-medium ${
+                        className={`px-4 md:px-5 py-2 md:py-2.5 rounded-lg transition-all font-medium text-sm md:text-base ${
                           selectedSize === weight
                             ? 'bg-[#56A45E] text-white shadow-md'
                             : 'bg-white border border-gray-300 text-gray-700 hover:border-gray-400'
@@ -695,71 +695,75 @@ export default function Marketplace() {
                 </div>
 
                 {/* Quantity and Actions */}
-                <div className="flex items-center gap-3 pt-2">
-                  <div className="flex items-center border border-gray-300 rounded-lg">
-                    <button
-                      onClick={() => setProductQuantity(Math.max(1, productQuantity - 1))}
-                      className="w-10 h-12 flex items-center justify-center text-gray-600 hover:bg-gray-50 transition-all disabled:opacity-30"
-                      disabled={productQuantity <= 1}
+                <div className="space-y-3 pt-2">
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center border border-gray-300 rounded-lg">
+                      <button
+                        onClick={() => setProductQuantity(Math.max(1, productQuantity - 1))}
+                        className="w-9 md:w-10 h-10 md:h-12 flex items-center justify-center text-gray-600 hover:bg-gray-50 transition-all disabled:opacity-30"
+                        disabled={productQuantity <= 1}
+                      >
+                        <svg className="w-3.5 md:w-4 h-3.5 md:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
+                        </svg>
+                      </button>
+                      <span className="w-11 md:w-12 h-10 md:h-12 flex items-center justify-center text-sm md:text-base font-semibold text-gray-900 border-x border-gray-300">
+                        {productQuantity}
+                      </span>
+                      <button
+                        onClick={() => setProductQuantity(productQuantity + 1)}
+                        className="w-9 md:w-10 h-10 md:h-12 flex items-center justify-center text-gray-600 hover:bg-gray-50 transition-all"
+                      >
+                        <svg className="w-3.5 md:w-4 h-3.5 md:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                        </svg>
+                      </button>
+                    </div>
+                    <button 
+                      onClick={() => toggleWishlist(selectedProduct.id)}
+                      className="w-10 md:w-12 h-10 md:h-12 flex items-center justify-center border border-gray-300 rounded-lg hover:bg-gray-50 transition-all"
                     >
-                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
-                      </svg>
-                    </button>
-                    <span className="w-12 h-12 flex items-center justify-center text-base font-semibold text-gray-900 border-x border-gray-300">
-                      {productQuantity}
-                    </span>
-                    <button
-                      onClick={() => setProductQuantity(productQuantity + 1)}
-                      className="w-10 h-12 flex items-center justify-center text-gray-600 hover:bg-gray-50 transition-all"
-                    >
-                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                      </svg>
+                      <Heart 
+                        className={`w-4 md:w-5 h-4 md:h-5 ${wishlistItems.includes(selectedProduct.id) ? 'fill-red-500 text-red-500' : 'text-gray-600'}`}
+                      />
                     </button>
                   </div>
-                  <button 
-                    onClick={() => {
-                      for (let i = 0; i < productQuantity; i++) {
-                        addToCart(selectedProduct);
-                      }
-                      toast.success(`Added ${productQuantity} item${productQuantity > 1 ? 's' : ''} to cart`);
-                      setShowCart(true);
-                    }}
-                    className="flex-1 h-12 bg-[#56A45E] text-white rounded-lg hover:bg-[#4A8A50] transition-all font-semibold flex items-center justify-center gap-2"
-                  >
-                    <ShoppingCart className="w-5 h-5" />
-                    Add To Cart
-                  </button>
-                  <button 
-                    onClick={() => {
-                      for (let i = 0; i < productQuantity; i++) {
-                        addToCart(selectedProduct);
-                      }
-                      toast.success('Proceeding to checkout...');
-                      navigateToCheckout();
-                    }}
-                    className="h-12 px-6 bg-[#FFA500] text-white rounded-lg hover:bg-[#FF8C00] transition-all font-semibold"
-                  >
-                    Buy Now
-                  </button>
-                  <button 
-                    onClick={() => toggleWishlist(selectedProduct.id)}
-                    className="w-12 h-12 flex items-center justify-center border border-gray-300 rounded-lg hover:bg-gray-50 transition-all"
-                  >
-                    <Heart 
-                      className={`w-5 h-5 ${wishlistItems.includes(selectedProduct.id) ? 'fill-red-500 text-red-500' : 'text-gray-600'}`}
-                    />
-                  </button>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 md:gap-3">
+                    <button 
+                      onClick={() => {
+                        for (let i = 0; i < productQuantity; i++) {
+                          addToCart(selectedProduct);
+                        }
+                        toast.success(`Added ${productQuantity} item${productQuantity > 1 ? 's' : ''} to cart`);
+                        setShowCart(true);
+                      }}
+                      className="h-11 md:h-12 bg-[#56A45E] text-white rounded-lg hover:bg-[#4A8A50] transition-all font-semibold text-sm md:text-base flex items-center justify-center gap-2"
+                    >
+                      <ShoppingCart className="w-4 md:w-5 h-4 md:h-5" />
+                      Add To Cart
+                    </button>
+                    <button 
+                      onClick={() => {
+                        for (let i = 0; i < productQuantity; i++) {
+                          addToCart(selectedProduct);
+                        }
+                        toast.success('Proceeding to checkout...');
+                        navigateToCheckout();
+                      }}
+                      className="h-11 md:h-12 bg-[#FFA500] text-white rounded-lg hover:bg-[#FF8C00] transition-all font-semibold text-sm md:text-base"
+                    >
+                      Buy Now
+                    </button>
+                  </div>
                 </div>
 
                 {/* Product Meta */}
-                <div className="pt-5 mt-5 border-t border-gray-200 space-y-3">
-                  <div className="flex items-center gap-2 text-sm">
+                <div className="pt-4 md:pt-5 mt-4 md:mt-5 border-t border-gray-200 space-y-2 md:space-y-3">
+                  <div className="flex items-center gap-2 text-xs md:text-sm">
                     <span className="text-gray-700 font-semibold">SKU :</span>
                     <span className="text-gray-600">GRFR85648HGJ</span>
                   </div>
-                  <div className="flex items-center gap-2 text-sm">
+                  <div className="flex items-center gap-2 text-xs md:text-sm flex-wrap">
                     <span className="text-gray-700 font-semibold">Tags :</span>
                     <button 
                       onClick={() => navigateToVendor({ name: selectedProduct.vendor, category: selectedProduct.category })}
@@ -768,16 +772,16 @@ export default function Marketplace() {
                       {selectedProduct.vendor}, {selectedProduct.category}
                     </button>
                   </div>
-                  <div className="flex items-center gap-3 text-sm">
+                  <div className="flex items-center gap-2 md:gap-3 text-xs md:text-sm flex-wrap">
                     <span className="text-gray-700 font-semibold">Share :</span>
-                    <div className="flex items-center gap-2">
-                      <button className="w-8 h-8 bg-[#1877F2] rounded-full flex items-center justify-center text-white hover:opacity-80 transition-opacity">
-                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    <div className="flex items-center gap-1.5 md:gap-2"> md:gap-2">
+                      <button className="w-7 h-7 md:w-8 md:h-8 bg-[#1877F2] rounded-full flex items-center justify-center text-white hover:opacity-80 transition-opacity">
+                        <svg className="w-3.5 h-3.5 md:w-4 md:h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
                       </button>
-                      <button className="w-8 h-8 bg-[#1DA1F2] rounded-full flex items-center justify-center text-white hover:opacity-80 transition-opacity">
-                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+                      <button className="w-7 h-7 md:w-8 md:h-8 bg-[#1DA1F2] rounded-full flex items-center justify-center text-white hover:opacity-80 transition-opacity">
+                        <svg className="w-3.5 h-3.5 md:w-4 md:h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
                       </button>
-                      <button className="w-8 h-8 bg-[#E60023] rounded-full flex items-center justify-center text-white hover:opacity-80 transition-opacity">
+                      <button className="w-7 h-7 md:w-8 md:h-8 bg-[#E60023] rounded-full flex items-center justify-center text-white hover:opacity-80 transition-opacity">
                         <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.372 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z"/></svg>
                       </button>
                       <button className="w-8 h-8 bg-[#56A45E] rounded-full flex items-center justify-center text-white hover:opacity-80 transition-opacity">
